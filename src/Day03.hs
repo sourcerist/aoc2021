@@ -6,8 +6,6 @@ import Data.Foldable
 import Data.Map (Map)
 import qualified Data.Map as Map
 import Data.Function (on)
-import Control.Concurrent (yield)
-import Debug.Trace
 
 day3a = do
     bins <- words <$> readFile "./data/3.txt"

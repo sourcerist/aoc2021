@@ -3,6 +3,7 @@ module Main where
 import Day01
 import Day02
 import Day03
+import Day04
 import System.Environment
 
 main :: IO ()
@@ -14,4 +15,6 @@ run ["day2a"] = day2a
 run ["day2b"] = day2b
 run ["day3a"] = day3a
 run ["day3b"] = day3b
+run ["day4a"] = day4a
+run ["day4b"] = day4b
 run xs = putStrLn $ "Invalid input: " <> show xs

@@ -23,6 +23,8 @@ dependencies:
 - base >= 4.7 && < 5
 - lens
 - containers
+- mtl
+- split
 
 library:
   source-dirs: src
