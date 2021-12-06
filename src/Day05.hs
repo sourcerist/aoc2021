@@ -1,18 +1,12 @@
-{-# LANGUAGE TupleSections #-}
-
 module Day05 where
 
-import System.IO
 import Data.Map (Map, (!))
 import qualified Data.Map as Map
 import Data.Set (Set)
 import qualified Data.Set as Set
-import Control.Lens
 import Data.List (unfoldr)
 import Data.List.Split (splitOn)
 import Data.Tuple (swap)
-import Control.Monad.State
-import Debug.Trace
 import Data.Foldable
 import Text.Parsec.String (Parser)
 import Text.Parsec

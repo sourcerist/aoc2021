@@ -5,6 +5,7 @@ import Day02
 import Day03
 import Day04
 import Day05
+import Day06
 import System.Environment
 
 main :: IO ()
@@ -20,4 +21,6 @@ run ["day4a"] = day4a
 run ["day4b"] = day4b
 run ["day5a"] = day5a
 run ["day5b"] = day5b
+run ["day6a"] = day6a
+run ["day6b"] = day6b
 run xs = putStrLn $ "Invalid input: " <> show xs
