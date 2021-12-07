@@ -19,5 +19,6 @@ movementCost p1 p2 = abs (p2 - p1)
 
 movementCost2 p1 p2 = (x * (x+1)) `div` 2 where x = abs (p2 - p1)
 
-cheapest lst f = minimumBy (compare `on` snd) . fmap (\x -> (x,cost x)) $ [minimum lst..maximum lst] where
+cheapest lst f = minimumBy (compare `on` snd) $ xs `zip` fmap cost xs where 
+    xs = [minimum lst..maximum lst] 
     cost x = sum . fmap (f x) $ lst
