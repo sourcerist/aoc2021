@@ -11,6 +11,7 @@ import Data.Function
 import Data.List
 import Control.Monad.State
 import Debug.Trace
+import Shared
 
 day9a = do
     m <- readMatrix <$> readFile "./data/9.txt"
@@ -22,13 +23,6 @@ day9b = do
     let basins = nub . fmap (flip evalState Set.empty . findBasin2 m . Set.singleton) $ lows
     let largestBasinSizes = fmap length . take 3 . sortBy (flip compare `on` length) $ basins
     print $ product largestBasinSizes
-
-type Position = (Integer,Integer)
-
-type PositionHeight = (Position, Integer)
-
-readMatrix :: String -> Map Position Integer
-readMatrix str = Map.fromList $ [((x,y), read [v]) | (x,row) <- zip [0..] (lines str), (y,v) <- zip [0..] row]
 
 neighbors (x,y) m = catMaybes [ (p,) <$> Map.lookup p m | p <- [(x+1,y), (x-1,y), (x,y+1), (x,y-1)] ]
 
