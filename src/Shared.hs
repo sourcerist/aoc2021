@@ -10,6 +10,6 @@ readMatrix str = Map.fromList $ [((x,y), read [v]) | (x,row) <- zip [0..] (lines
 
 showGrid :: Map Position Integer -> String 
 showGrid m = unlines $ fmap rows [0..rowMax] where
-    rows i = concatMap (show . (m !)) [(i,x) | x <- [0..colMax]]
-    rowMax = maximum . fmap fst . Map.keys $ m
-    colMax = maximum . fmap snd . Map.keys $ m
+    rows i = concatMap (show . (m !)) [(x,i) | x <- [0..colMax]]
+    rowMax = maximum . fmap snd . Map.keys $ m
+    colMax = maximum . fmap fst . Map.keys $ m
