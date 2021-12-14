@@ -1,21 +1,14 @@
-{-# LANGUAGE TupleSections #-}
 {-# LANGUAGE FlexibleContexts #-}
 
 module Day14 where
 
 import Data.Map (Map, (!))
 import qualified Data.Map as Map
-import Data.Set (Set)
-import qualified Data.Set as Set
 import Data.Foldable
-import Shared
 import Text.Parsec.String (Parser)
 import Text.Parsec hiding (State)
 import Data.Char (isSpace)
-import Data.List (sort, group)
-import Data.Ord
 import Data.Function (on)
-import Debug.Trace
 import Control.Monad.State
 
 
