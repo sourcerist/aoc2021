@@ -17,7 +17,7 @@ day15a = do
 day15b = do
     m <- expandGrid . readMatrix <$> readFile "./data/15.txt"
     let maxPosition = maximum . Map.keys $ m
-    print $ findPathCost m (Set.singleton (0,0)) (Set.singleton (0, (0,0))) maxPosition
+    print $ findPathCost m Set.empty (Set.singleton (0, (0,0))) maxPosition
 
 type Grid = Map Position Integer
 
@@ -27,7 +27,7 @@ type CostSet = Set (Integer, Position)
 
 findPathCost :: Grid -> VisitedSet -> CostSet -> Position -> Integer
 findPathCost grid visited priorityQueue destination = if (x,y) == destination then cost else next where
-    Just (cheapest@(cost, pos@(x,y)), tmp) = Set.minView priorityQueue
+    Just (cheapest@(cost, pos@(x,y)), tmp) = filteredMinView visited priorityQueue
     newNeighbors = Set.fromList $
         [ (cost + (grid!p), p)
         | p <- [(x-1,y), (x+1,y), (x,y-1), (x,y+1)]
@@ -35,6 +35,10 @@ findPathCost grid visited priorityQueue destination = if (x,y) == destination th
         , not $ Set.member p visited ]
     newQueue = tmp `Set.union` newNeighbors
     next = findPathCost grid (Set.insert pos visited) newQueue destination
+
+filteredMinView visited priorityQueue = do
+    v@((_,p), remaining) <- Set.minView priorityQueue
+    if not (Set.member p visited) then return v else filteredMinView visited remaining
 
 expandGrid :: Grid -> Grid
 expandGrid grid = Map.fromList expanded where
