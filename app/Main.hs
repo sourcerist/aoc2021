@@ -16,6 +16,7 @@ import Day13
 import Day14
 import Day15
 import Day16
+import Day17
 import System.Environment ( getArgs )
 
 main :: IO ()
@@ -53,4 +54,6 @@ run ["day15a"] = day15a
 run ["day15b"] = day15b
 run ["day16a"] = day16a
 run ["day16b"] = day16b
+run ["day17a"] = day17a
+run ["day17b"] = day17b
 run xs = putStrLn $ "Invalid input: " <> show xs
