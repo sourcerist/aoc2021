@@ -5,6 +5,7 @@ import Data.Map (Map, (!))
 import qualified Data.Map as Map
 import Data.Foldable
 import Control.Monad.State.Strict
+import Shared
 
 
 day16a = do
@@ -38,11 +39,6 @@ charMap = Map.fromList
 getBits :: String -> String
 getBits = concatMap (charMap!)
 
-convert :: String -> Integer
-convert = convert' . fmap (read . (:[])) . reverse where
-    convert' [] = 0
-    convert' (x : xs) = x + 2 * convert' xs
-
 data Packet = Packet
     { version :: Integer
     , typeId :: Integer
@@ -68,7 +64,7 @@ packets = do
 
 literal = do
     pos <- readPos
-    val <- convert . concat <$> literalVals
+    val <- binStringToInteger . concat <$> literalVals
     return $ Literal val
 
 literalVals = do
@@ -94,7 +90,7 @@ readPackets i =
         p <- packet
         (p:) <$> readPackets (i-1)
 
-readBits i = convert <$> readChars i
+readBits i = binStringToInteger <$> readChars i
 
 readChars :: Int -> State (Int, String) String
 readChars i = do

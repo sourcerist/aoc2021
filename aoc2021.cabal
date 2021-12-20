@@ -42,6 +42,8 @@ library
       Day15
       Day16
       Day17
+      Day18
+      Day20
       Lib
       Shared
   other-modules:
