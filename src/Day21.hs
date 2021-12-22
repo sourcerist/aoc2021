@@ -1,6 +1,5 @@
 {-# LANGUAGE TemplateHaskell #-}
 {-# LANGUAGE ScopedTypeVariables #-}
-{-# LANGUAGE FlexibleContexts #-}
 module Day21 where
 
 import Data.Map (Map, (!))
@@ -103,3 +102,5 @@ singleStep ps@(p1, p2) count = if hasWinner ps then Map.singleton ps count else 
         [ ((p2, updateWithRoll p1 rollTotal),count*n)
         | (rollTotal,n) <- [(3,1),(4,3),(5,6),(6,7),(7,6),(8,3),(9,1)] ]
 
+step :: Map PlayerOrder Integer -> Map PlayerOrder Integer
+step = Map.unionsWith (+) . fmap (uncurry singleStep) . Map.toList
