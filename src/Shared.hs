@@ -3,6 +3,7 @@ module Shared where
 import Data.Map (Map, (!))
 import qualified Data.Map as Map
 import Data.Traversable (for)
+import Data.Maybe (fromMaybe)
 
 type Position = (Integer,Integer)
 
@@ -23,3 +24,14 @@ binStringToInteger :: String -> Integer
 binStringToInteger = convert' . fmap (read . (:[])) . reverse where
     convert' [] = 0
     convert' (x : xs) = x + 2 * convert' xs
+
+toDisplayGrid m = Map.fromList [((x, y), v) |
+                                x <- [0 .. xMax],
+                                y <- [0 .. yMax],
+                                let v = fromMaybe '0' (Map.lookup (x,y) m') ] where
+    xOffset = (*(-1)) . minimum . fmap fst . Map.keys $ m
+    yOffset = (*(-1)) . minimum . fmap snd . Map.keys $ m
+    m' = Map.mapKeys (\(x,y) -> (x+xOffset, y+yOffset)) m
+    xMax = maximum . fmap fst . Map.keys $ m'
+    yMax = maximum . fmap snd . Map.keys $ m'
+
